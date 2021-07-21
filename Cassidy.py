@@ -4,7 +4,8 @@ import os
 import sys
 import traceback
 
-Server = [["name","key","port","cfg","path"]]
+Server = [["name","key","port","cfg","gamemode","path"]]
+
 cmd = [""]*99
 bindir = [""]
     
@@ -40,23 +41,20 @@ def main():
                 Option = input("\033[1;36m > \033[1;m")
 
                 while Option == "1":
-                    for i in range (0,len(servmulti),1):
+                    for i in range (0,len(Server),1):
                         tri = str(i)
-                        tri1 = str(i + 1)
-                        print(tri + ") " + servmulti[i] )
-                    print(tri1 + ") All")
+                        print(tri + ") " + Server[i][0] )
+                    print(str(tri + 1) + ") All")
 
                     repo = input("\033[1;32m Server Number > \033[1;m")
                     
                     for j in range(0,99,1):
                         if repo == str(j):
-                            cmd[j] = os.system("cd " + bindirectory[j] + " && wine .\\bin\\plutonium-bootstrapper-win32.exe t6zm " + serverdirectory[j] + " -dedicated +start_map_rotate +set key " + key[j] + " +set net_port " + port[j] + " +set sv_config " + cfg[j] )
-                        
+                            cmd[j] = os.system("cd " + bindir + " && wine .\\bin\\plutonium-bootstrapper-win32.exe " + Server[j][4] + Server[j][5] + " -dedicated +start_map_rotate +set key " + Server[j][1] + " +set net_port " + Server[j][2] + " +set sv_config " + Server[j][3])
                         elif repo == "back":
                             menu()
-                        elif repo == "gohome":
+                        elif repo == "home":
                             menu()
-
                             print (file.read())
                         else:
                             print ("\033[1;31mSorry, that was an invalid command!\033[1;m") 					
